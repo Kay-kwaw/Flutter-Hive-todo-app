@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netwoking/contants.dart';
+import 'package:flutter_netwoking/main.dart';
+import 'package:flutter_netwoking/models/task_model.dart';
+import 'package:hive/hive.dart';
+  late Box<Todo> todoBox;
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -15,6 +19,15 @@ enum FilterOptions {
 }
 
 class _HomepageState extends State<Homepage> {
+  
+
+
+  @override
+  void initState() {
+    super.initState();
+    todoBox = Hive.box<Todo>(todoBoxName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,18 +68,11 @@ class _HomepageState extends State<Homepage> {
          ],
       ),
       body: const SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text("Hello there!")
-            ),
-            Padding(padding: EdgeInsets.all(10)
-            )
-          ],
-        ),
+        child: ValueListenableBuilder(
+          valueListenable: valueListenable, builder: builder)
       ),
       floatingActionButton: myFloatingActionButton(context),
     );
   }
-}
+  }
+  

@@ -6,7 +6,7 @@ part of 'task_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TodoModelAdapter extends TypeAdapter<Todo> {
+class TodoAdapter extends TypeAdapter<Todo> {
   @override
   final typeId = 0;
 

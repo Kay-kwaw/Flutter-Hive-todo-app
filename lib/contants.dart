@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netwoking/homepage.dart';
+import 'package:flutter_netwoking/models/task_model.dart';
 const Color primaryColor = Colors.black;
 const Color textColor = Colors.white;
+
+
+final TextEditingController titleController = TextEditingController();
+final TextEditingController contentController = TextEditingController();
 
 
 final ThemeData myCustomTheme = ThemeData(
@@ -28,10 +34,10 @@ final ThemeData myCustomTheme = ThemeData(
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
-                      // Handle action for Item 1
                     },
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: titleController,
+                      decoration: const InputDecoration(
                         hintText: "Title",
                         hintStyle: TextStyle(color: textColor),
                         fillColor: primaryColor,
@@ -44,10 +50,10 @@ final ThemeData myCustomTheme = ThemeData(
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
-                      // Handle action for Item 2
                     },
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child:TextField(
+                      controller: contentController,
+                      decoration: const InputDecoration(
                         hintText: "Content",
                         fillColor: primaryColor,
                         filled: true
@@ -55,7 +61,20 @@ final ThemeData myCustomTheme = ThemeData(
                   ),
                   ),
                   const SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){}, child: const Text("Save", style: TextStyle(
+                  ElevatedButton(onPressed: (){
+                    final String title = titleController.text;
+                    final String content = contentController.text;
+                    //This is how to get values from the textfield
+                    //This line creates a new Todo object. It appears that Todo is a custom class representing a task or to-do item.
+
+                    Todo todo = Todo(title: title, content: content, isCompleted: false);
+                    //This line adds the newly created Todo object to a box, which is presumably some form of data storage.
+
+                    todoBox.add(todo);
+
+                    Navigator.pop(context);
+                  },
+                   child: const Text("Save", style: TextStyle(
                     color: primaryColor
                   ),))
                 ],
